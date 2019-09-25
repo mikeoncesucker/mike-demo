@@ -1,0 +1,132 @@
+@import '~antd/es/style/themes/default.less';
+.message {
+  padding: 16px 0px 16px 160px;
+}
+.result {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .content {
+    flex: 1;
+    max-width: 1200px;
+    .readed_delete {
+      margin: 15px 0;
+      display: flex;
+      justify-content: space-between;
+      color: #5E616F;
+      >span {
+        cursor: pointer;
+      }
+      .font {
+        font-size: 14px;
+        margin-right: 4px;
+      }
+    }
+  }
+}
+
+@pro-header-hover-bg: rgba(0, 0, 0, 0.025);
+.notice_item:hover {
+  background: #F6F6F6;
+}
+.delete {
+  visibility: hidden;
+  padding: 0 0 0 79px;
+}
+.delete:hover {
+  color: #08ABF8;
+}
+.notice_item:hover .delete {
+  visibility: visible;
+}
+.notice_item {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100px;
+  padding: 0 15px;
+  border-bottom: 1px solid rgba(232, 232, 232, 1);
+  cursor: pointer;
+  >div:nth-child(1) {
+    margin: 0 0 10px;
+    font-weight: bold;
+    font-size: 16px;
+  }
+  .notice_item_title {
+    color: #33353D;
+  }
+  .notice_item_title_readed {
+    color: #999BA1;
+  }
+  .notice_item_desc {
+    font-size: 14px;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 15px;
+    color: #999BA2;
+
+    div:nth-child(1) {
+      flex: 1;
+      margin-right: 50px;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
+    
+    .item_create_at {
+      width: 180px;
+      text-align: right;
+    }
+
+    .item_source {
+      width: 150px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .item_warn {
+      color: #5E616F;
+    }
+  }
+}
+.detail_item {
+  height: calc(~"100vh - 208px");
+  padding: 70px 122px 0 253px;
+  background: #fff;
+  .detail_title {
+    font-size: 16px;
+    font-weight: 500px;
+    color: #33353D;
+  }
+  .detail_des {
+    padding: 10px 16px 0;
+    font-size: 14px;
+    color: #5E616F;
+  }
+  .source_time {
+    display: flex;
+    color: #999BA2;
+    p:not(last-child) {
+      padding-right: 80px;
+    }
+    .deletes:hover {
+      color: #08ABF8;
+      cursor: pointer;
+    }
+  }
+}
+.page {
+  text-align: right;
+  margin: 20px 0 66px;
+  max-width: 1200px;
+ }
+ .footer {
+   background: #213571;
+   height: 32px;
+   padding: 6px;
+   font-size: 12px;
+   color: #fff;
+   text-align: center;
+ }

@@ -1,0 +1,44 @@
+@import '~antd/es/style/themes/default.less';
+.warpper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: calc(~"100vh - 170px");
+  min-height: 400px;
+  background: #fff;
+  color: #33353D;
+  overflow: hidden;
+  
+  .account {
+    font-size: 24px;
+    font-weight: 400px;
+  }
+  .btn {
+    background-color: #08ABF8;
+    border-color: #08ABF8;
+    margin: 22px auto 0;
+  }
+  .input_warpper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+}
+.item {
+  display: flex;
+  flex-direction: row;
+  >span {
+    line-height: 40px;
+    text-align: right;
+    margin-right: 22px;
+  }
+  span {
+    font-size: 14px;
+    color: #33353D;
+    white-space: nowrap;
+  }
+  input {
+    width: 304px;
+  }
+}

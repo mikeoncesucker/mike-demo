@@ -1,0 +1,159 @@
+.root {
+  touch-action: none;
+  -ms-content-zooming: none;
+  margin: 0;
+  padding: 42px;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background-size: cover;
+  min-height: 712px;
+  min-width: 1200px;
+
+  .container {
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+
+    .leftBox {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 34px 68px 138px 32px;
+      background-size: 100% 100%;
+      height: 100%;
+
+      .logo {
+        width: 322px;
+      };
+
+      .themeBox {
+        color: #fff;
+        font-size: 20px;
+        text-align: right;
+        .theme1 {
+          font-size: 36px;
+          margin-bottom: 8px;
+          letter-spacing: 2px;
+        }
+      }
+    };
+
+    .rightBox {
+      width: 488px;
+      background: #fff;
+
+      .languageBox {
+        margin: 30px 30px 60px;
+        text-align: right
+      }
+
+      .language_box {
+        display: flex;
+        justify-content: space-between;
+        margin: 30px 30px 20px;
+      }
+
+      .loginForm {
+        width: 368px;
+        overflow: hidden;
+        margin: 0 60px;
+
+        .title {
+          line-height: 24px;
+          font-size: 24px;
+          color: #666;
+          text-align: center
+        };
+
+        .line {
+          width: 78px;
+          height: 4px;
+          background: #3A5DDF;
+          border-radius: 2px;
+          margin: 0 auto
+        }
+
+        input {
+          width: 368px;
+          border-radius: 0;
+          border: 0;
+          border-bottom: 1px solid #E8E8E8;
+        }
+        
+        input:focus {
+          box-shadow: none;
+          border-color: #3A5DDF;
+        }
+        
+        .fontColor {
+          color: #999;
+        }
+       
+        .loginFormButton {
+          height: 48px;
+          width: 368px;
+          margin-top: 48px;
+          font-size: 16px;
+          color: #fff;
+          background: #3A5DDF;
+          border: 0px;
+          border-color: #3A5DDF;
+          box-shadow: 0 4px 8px 0px rgba(58; 93; 223; 0.5);
+        }
+        .btnCode {
+          width: 130px;
+          height: 32px;
+          margin-bottom: 5px;
+          background: #3A5DDF;
+          border: 0;
+        };
+        button[disabled] {
+          box-shadow: none;
+          background: #B9BCC6;
+          color: #FFF;
+        }
+
+        :global {
+          .ant-select {
+            .ant-select-selection {
+              background: url(../../assets/images/way-icon.png) 10px center no-repeat;
+              background-size: 14px;
+              border-top: 0;
+              border-left: 0;
+              border-right: 0;
+              border-radius: 0;
+              box-shadow: none;
+              padding-left: 18px;
+            }
+          }
+        }
+      }
+    
+      .forgetPass {
+        display: inline-block;
+        margin-top: 24px;
+        color: #3A5DDF;
+        font-size: 14px;
+        text-align: left;
+        text-decoration: underline;
+      }
+    }
+  }
+  .copyRight {
+    color: #fff;
+    text-align: center;
+    line-height: 42px;
+    font-size: 12px
+  };
+};
+
+:global {
+  .ant-select-dropdown-menu-item-active:not(.ant-select-dropdown-menu-item-disabled) {
+    background: rgba(57,92,222,.08) !important;
+  }
+  .ant-select-dropdown-menu-item-selected {
+    font-weight: normal !important;
+  }
+}

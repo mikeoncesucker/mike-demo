@@ -1,0 +1,138 @@
+.dashboard {
+  min-height: 100vh;
+  min-width: 100vw;
+  background-size: 100% 100%
+}
+.container {
+  padding: 74px 78px 0;
+  .header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 42px;
+    .right {
+      display: flex;
+      align-items: center;
+      color: #fff;
+      span {
+        cursor: pointer;
+      }
+      span:nth-child(2) {
+        margin: 0 17px;
+      }
+      .search_box {
+        width: 170px;
+        height: 32px;
+        display: flex;
+        align-items: center;
+        background:rgba(255,255,255,0.14);
+        border-radius: 6px;
+        cursor: pointer;
+        .icon_search {
+          margin: 0 9px 0 13px;
+        }
+        .hr {
+          width: 1px;
+          height: 15px;
+          background: rgba(255,255,255,.3);
+          margin: 0 8px 0 0;
+        }
+      }
+    }
+  }
+  .logo {
+    width: 322px;
+    height: 34px;
+  }
+  .portalCards {
+    height:  calc(~'100vh - 150px');
+  }
+}
+.gridstack {
+  .grid-stack {
+    background: #fff !important;
+  }
+}
+.gridstack_box {
+  z-index: 99;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  margin-top: 10px;
+  background: #fff;
+  height: 360px;
+  padding: 0 39px;
+  overflow-y: auto;
+  .gridstack_box_top {
+    margin: 30px 0 15px 0;
+    color: #424363;
+    span {
+      font-size: 24px;
+    }
+    .serarch_box {
+      display: inline-block;
+      width: 224px;
+      height: 34px;
+      margin-left: 28px;
+      line-height: 34px;
+      vertical-align: top;
+      position: relative;
+      .icon_search {
+        position: absolute;
+        left: 12px;
+        top: 4px;
+        z-index: 11;
+        font-size: 18px;
+        font-weight: bold;
+      }
+      :global{
+        .ant-input {
+          border-radius: 17px;
+          display: block;
+          border: 2px solid #424363;
+          padding-left: 32px;
+        }
+        .ant-input:focus {
+          box-shadow: none;
+          border-right-width: 2px !important;
+        }
+      }
+      
+    }
+  }
+  .gridstack_box_toolbar{
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    text-align: right;
+    width: 100%;
+    padding: 10px 52px;
+    box-sizing: border-box;
+    border-top: 1px dashed #666;
+    .btn_finish {
+      background: linear-gradient(#3ec3ff, #1d90ff);
+      color: #fff;
+      width: 76px;
+      height: 30px;
+      line-height: 30px;
+      font-size: 14px;
+      font-weight: bold;
+      &:hover,
+      &:focus {
+        border-color: #3ec3ff !important;
+      }
+    }
+  }
+}
+.placeholder-box {
+  padding-top: 64px;
+  font-size: 18px;
+  color: #666;
+  text-align: center;
+  img {
+    display: inline-block;
+    width: 92px;
+    margin-bottom: 20px;
+  }
+}
