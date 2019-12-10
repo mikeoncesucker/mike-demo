@@ -10,7 +10,7 @@ class Theme extends React.Component<ThemeProps, any> {
     const { formatMessage } = this.props.intl;
     return (
       <div className={styles.leftBox} 
-        style={{ background: `url(${require('../../assets/images/login_bg_top.jpg')})`}}
+        style={{ background: `url(${require('../../assets/images/login_bg_top.jpg')})`, backgroundSize: '100%'}}
       >
         <img className={styles.logo} src={require('../../assets/images/logo.png')} alt="logo"/>
         <div className={styles.themeBox}>
@@ -18,7 +18,7 @@ class Theme extends React.Component<ThemeProps, any> {
             Shenzhen World 
             <p>Exhibition &#38; Convention Center</p>
           </div>
-          <p>{formatMessage(login_msg.title_pre)} · {formatMessage(login_msg.title_sufix)}</p>
+          <p>{formatMessage(login_msg.title_sufix)}</p>
         </div>
       </div>
     )

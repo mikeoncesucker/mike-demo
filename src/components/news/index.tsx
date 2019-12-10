@@ -15,7 +15,7 @@ export interface NewsProps {
   getUnreadNoticeList;
   getAppCodeList;
   resetNoticeRead;
-  resetNoticeLists
+  resetNoticeLists;
 }
 
 class News extends React.Component<NewsProps, any> {
@@ -29,7 +29,7 @@ class News extends React.Component<NewsProps, any> {
     // 一分钟请求一次消息列表
     this.notice_timer = setInterval(() => {
       this.getUnreadNoticeList();
-    }, 1000 * 60);
+    },60*1000);
   }
   componentWillUnmount() {
     clearInterval(this.notice_timer);
@@ -87,6 +87,7 @@ class News extends React.Component<NewsProps, any> {
       <div className={styles.content}>
         <div className={styles.listBox}>
           {unreadNoticeList && unreadNoticeList.noticeEntities.map((notice, index) => {
+            const appCode = appCodeList.find((item)=> item.code === notice.appCode) || {};
             return (index<5&&<Row className={styles.noticItem} key={index} onClick={this.toDetail.bind(this, notice.id)}>
               <Col span={1}>
                 <Badge color={warringTypes[notice.level]} />
@@ -101,7 +102,14 @@ class News extends React.Component<NewsProps, any> {
                   }
                   span={24}
                 >
-                  {notice.title}
+                  <span className={styles.name}>{notice.title}</span>
+                  {
+                    notice.images ? <img src={require('../../assets/images/pic.png')} alt=""/> : null
+                  }
+                  {
+                    notice.videos !== '[]' ? <img src={require('../../assets/images/video.png')} alt=""/> : null
+                  }
+                  
                 </Col>
                 <p
                   className={
@@ -116,11 +124,8 @@ class News extends React.Component<NewsProps, any> {
                 <Row className={styles.noticeBtm}>
                   <Col span={12} className={styles.origin}>
                     {formatMessage(common_msg.origin)}:
-                    {appCodeList
-                      .filter((item)=>item.code === notice.appCode)
-                      .map((item)=> (
-                        intl.locale === 'zh' ? item.name : item.english
-                      ))
+                    {
+                      intl.locale === 'zh' ? appCode.name : appCode.english
                     }
                   </Col>
                   <Col span={12} className={styles.noticeTime}>
@@ -135,15 +140,17 @@ class News extends React.Component<NewsProps, any> {
               style={{ textAlign: 'left', cursor: 'pointer' }}
               span={12}
             >
-              <Icon type="check" className={styles.font} />
-              <span onClick={this.resetNoticeRead}>{formatMessage(common_msg.readed)}</span>
+              <p>
+                <Icon type="check" className={styles.font} />
+                <span onClick={this.resetNoticeRead}>{formatMessage(common_msg.readed)}</span>
+              </p>
             </Col>
             <Col
               style={{ textAlign: 'right', cursor: 'pointer' }}
               span={12}
               onClick={this.goNoticeList}
             >
-              {formatMessage(common_msg.read_all)} >
+              <p>{formatMessage(common_msg.read_all)} &#62;</p>
             </Col>
           </Row>
         </div>
@@ -203,7 +210,7 @@ const mapDispatch2Props = ({
   getUnreadNoticeList, 
   getAppCodeList,
   resetNoticeRead,
-  resetNoticeLists
+  resetNoticeLists,
 })
 export default connect(
   mapState2Props,

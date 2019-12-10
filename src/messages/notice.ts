@@ -10,6 +10,6 @@ export const notice_msg = defineMessages({
 	},
 	notice_null: {
 		id: 'notice_null',
-		defaultMessage: 'No news to be cleared',
+		defaultMessage: 'No news to clear',
 	}
 });

@@ -7,8 +7,29 @@ import axios from 'axios';
  * @returns
  */
 export function searchData(query) {
-  let { searchName, page, size } = query;
-  return axios.get(`/api/v1/ucsp/search/?query=${searchName}&page=${page}&size=${size}`);
+  let { searchName, page, size, language } = query;
+  return axios.get(`/api/v1/ucsp/search/?query=${searchName}&page=${page}&size=${size}&language=${language}`);
+}
+
+/**
+ * 词云列表
+ *
+ * @export
+ * @returns
+ */
+export function getWordCloud(query) {
+  return axios.get(`/api/v1/ucsp/search/word_cloud`);
+}
+
+/**
+ * 保存搜索词
+ *
+ * @export
+ * @returns
+ */
+export function getSaveQueryWord(query) {
+  let { searchName } = query;
+  return axios.get(`/api/v1/ucsp/search/saveQueryWord?query=${searchName}`);
 }
 
 /**
@@ -18,7 +39,7 @@ export function searchData(query) {
  * @returns
  */
 export function getDetailById(id) {
-  return axios.get(`/api/v1/ucsp/query/seach/id/${id}`);
+  return axios.get(`/api/v1/ucsp/event/seach/id/${id}`);
 }
 
 /**

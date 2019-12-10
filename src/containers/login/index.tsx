@@ -1,10 +1,12 @@
 import * as React from 'react';
 import { Form, Input, Button, Icon, message } from 'antd';
+import store from 'store';
 import { Link } from 'react-router-dom';
 import styles from './style.module.less';
 import { connect } from 'react-redux';
 import Theme from './theme';
 import Language from '../../components/language';
+import  Footer  from '../../components/footer';
 import { injectIntl } from 'react-intl';
 import { common_msg } from '../../messages/common';
 import { login_msg } from '../../messages/login';
@@ -30,16 +32,15 @@ class Login extends React.Component<ILoginProps, any> {
     this.props.form.validateFields()
   }
   GetQueryString = (name,token) => {
-    let url = window.location.href;
-    if(url.indexOf(name) > -1) {
-      let str =url.substr(url.indexOf('=')+1);
-      if(str.indexOf('&') > -1) {
-        let jumpurl = str.split('&')[0];
-        return decodeURIComponent(`${jumpurl}?${str.substr(str.indexOf('&')+1)}&accessToken=${token}`);
-      }
-      return decodeURIComponent(`${str}?accessToken=${token}`)
-    }
-    return null
+    let url = window.location.href;
+    if(url.indexOf(name) > -1) {
+      let str = url.substr(url.indexOf('=')+1);
+      if(str.indexOf('?') > -1) {
+        return decodeURIComponent(`${str}&accessToken=${token}`);
+      }
+      return decodeURIComponent(`${str}?accessToken=${token}`)
+    }
+    return null
   }
   handleSubmit = (e) => {
     e.preventDefault();
@@ -51,6 +52,7 @@ class Login extends React.Component<ILoginProps, any> {
           data: values,
           cb: (err, res) => {
             if (res && res.status.code === '200') {
+              store.set('local_language', intl.locale);
               setLanguage({
                 language: {
                   language: intl.locale === 'zh' ? 'chinese' : 'english'
@@ -65,6 +67,12 @@ class Login extends React.Component<ILoginProps, any> {
                 }
                 if (res.data.remind === '密码3天后失效') {
                   message.warn(formatMessage(login_msg.login_remind_three))
+                }
+                if (res.data.remind === '密码2天后失效') {
+                  message.warn(formatMessage(login_msg.login_remind_two))
+                }
+                if (res.data.remind === '密码明天失效') {
+                  message.warn(formatMessage(login_msg.login_remind_one))
                 }
               }
               let url = this.GetQueryString('expiredUrl',res.data.accessToken);
@@ -95,7 +103,7 @@ class Login extends React.Component<ILoginProps, any> {
     const { formatMessage } = intl;
     return (
       <div className={styles.root}
-        style={{ background: `url(${require('../../assets/images/login_bg_btm.jpg')})` }}>
+        style={{ background: `url(${require('../../assets/images/login_bg_btm.jpg')})`, backgroundSize: 'cover' }}>
         <div className={styles.container}>
           <Theme intl={intl}></Theme>
           <div className={styles.rightBox}>
@@ -107,7 +115,7 @@ class Login extends React.Component<ILoginProps, any> {
                 {formatMessage(login_msg.welcome_to_login)}
               </h3>
               <p className={styles.line}></p>
-              <Form onSubmit={this.handleSubmit} style={{ marginTop: '80px' }}>
+              <Form onSubmit={this.handleSubmit} style={{ marginTop: '.8rem' }}>
                 <Form.Item
                   validateStatus={accountError ? 'error' : ''}
                   help={accountError || ''}
@@ -166,12 +174,9 @@ class Login extends React.Component<ILoginProps, any> {
 					      </span>
               </Link>
             </div>
-
           </div>
         </div>
-        <div className={styles.copyRight}>
-          Copyright &#169;&#65039; 2019 {formatMessage(common_msg.corpright)}
-        </div>
+        <Footer intl={intl}/>
       </div>
     );
   }

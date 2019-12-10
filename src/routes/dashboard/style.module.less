@@ -1,15 +1,14 @@
 .dashboard {
   min-height: 100vh;
-  min-width: 100vw;
-  background-size: 100% 100%
+  width: 100%;
 }
 .container {
-  padding: 74px 78px 0;
+  padding: .74rem .78rem 1px;
   .header {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-bottom: 42px;
+    margin-bottom: .42rem;
     .right {
       display: flex;
       align-items: center;
@@ -18,39 +17,34 @@
         cursor: pointer;
       }
       span:nth-child(2) {
-        margin: 0 17px;
+        margin: 0 .17rem;
       }
       .search_box {
-        width: 170px;
-        height: 32px;
+        width: 1.7rem;
+        height: .32rem;
         display: flex;
         align-items: center;
         background:rgba(255,255,255,0.14);
-        border-radius: 6px;
+        border-radius: .06rem;
         cursor: pointer;
         .icon_search {
-          margin: 0 9px 0 13px;
+          margin: 0 .09rem 0 .13rem;
         }
         .hr {
           width: 1px;
-          height: 15px;
+          height: .15rem;
           background: rgba(255,255,255,.3);
-          margin: 0 8px 0 0;
+          margin: 0 .08rem 0 0;
         }
       }
     }
   }
   .logo {
-    width: 322px;
-    height: 34px;
+    width: 3.22rem;
+    height: .34rem;
   }
-  .portalCards {
-    height:  calc(~'100vh - 150px');
-  }
-}
-.gridstack {
-  .grid-stack {
-    background: #fff !important;
+  .topCards {
+    min-height: calc(~'100vh - 1.5rem');
   }
 }
 .gridstack_box {
@@ -59,65 +53,48 @@
   left: 0;
   bottom: 0;
   width: 100%;
-  margin-top: 10px;
+  margin-top: .10rem;
   background: #fff;
-  height: 360px;
-  padding: 0 39px;
-  overflow-y: auto;
+  height: 3.57rem;
   .gridstack_box_top {
-    margin: 30px 0 15px 0;
+    display: flex;
+    padding: 0 .39rem;
+    margin: .3rem 0 .15rem;
     color: #424363;
-    span {
-      font-size: 24px;
-    }
+    font-size: .24rem;
     .serarch_box {
-      display: inline-block;
-      width: 224px;
-      height: 34px;
-      margin-left: 28px;
-      line-height: 34px;
-      vertical-align: top;
-      position: relative;
-      .icon_search {
-        position: absolute;
-        left: 12px;
-        top: 4px;
-        z-index: 11;
-        font-size: 18px;
-        font-weight: bold;
-      }
+      width: 2.24rem;
+      height: .34rem;
+      margin-left: .28rem;
       :global{
         .ant-input {
-          border-radius: 17px;
-          display: block;
-          border: 2px solid #424363;
-          padding-left: 32px;
+          border-radius: .17rem;
+          border: .02rem solid #424363;
         }
         .ant-input:focus {
           box-shadow: none;
-          border-right-width: 2px !important;
         }
       }
-      
     }
   }
-  .gridstack_box_toolbar{
-    position: absolute;
-    left: 0;
-    bottom: 0;
+  .bottom_cards {
+    padding: 0 .39rem;
+    height: calc(~'3.57rem - 1.31rem');
+  }
+  .gridstack_box_toolbar {
+    height: .5rem;
+    line-height: .5rem;
     text-align: right;
-    width: 100%;
-    padding: 10px 52px;
-    box-sizing: border-box;
     border-top: 1px dashed #666;
     .btn_finish {
+      width: .76rem;
+      height: .30rem;
+      margin-right: .52rem;
       background: linear-gradient(#3ec3ff, #1d90ff);
-      color: #fff;
-      width: 76px;
-      height: 30px;
-      line-height: 30px;
-      font-size: 14px;
+      font-size: .14rem;
       font-weight: bold;
+      color: #fff;
+      cursor: pointer;
       &:hover,
       &:focus {
         border-color: #3ec3ff !important;
@@ -125,14 +102,15 @@
     }
   }
 }
-.placeholder-box {
-  padding-top: 64px;
-  font-size: 18px;
+.placeholder_box {
+  padding-top: .64rem;
+  margin: 0 auto;
+  font-size: .18rem;
   color: #666;
   text-align: center;
   img {
     display: inline-block;
-    width: 92px;
-    margin-bottom: 20px;
+    width: .92rem;
+    margin-bottom: .2rem;
   }
 }

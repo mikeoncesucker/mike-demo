@@ -20,15 +20,32 @@ export default class ResultItem extends React.PureComponent<IResultItemProps> {
     }
     
   }
+  iconShow = (type)=> {
+    if(type) {
+      if(type===1) {
+        return  <img src={require('../../assets/images/pic.png')} alt="" />
+      }else if(type===2) {
+        return <img src={require('../../assets/images/video.png')} alt=""/>
+      }else {
+        return (
+          <div style={{display:'inline-block'}}>
+            <img src={require('../../assets/images/pic.png')} alt="" />
+            <img src={require('../../assets/images/video.png')} alt="" />
+          </div>
+        )
+      }
+    }
+  }
   public render() {
     let {data} = this.props;
     return (
       <div className={styles.result_item} onClick={this.openUrl.bind(this,data.url,data.ucspCenterId)}>
-        <div 
-          className={styles.result_item_title} 
-          dangerouslySetInnerHTML={{ __html: data.title || ''}}
-        />
-        
+        <div className={styles.result_item_title} >
+          <span dangerouslySetInnerHTML={{ __html: data.title || ''}}/>
+          {
+            data.extra ? this.iconShow.bind(this,data.extra*1)() : null
+          }
+        </div>
         <div 
           className={styles.result_item_desc} 
           dangerouslySetInnerHTML={{ __html: data.content || '' }}

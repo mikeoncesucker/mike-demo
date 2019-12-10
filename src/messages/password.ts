@@ -2,7 +2,7 @@ import { defineMessages } from 'react-intl';
 export const password_msg = defineMessages({
   change_psw: {
     id: 'change_psw',
-    defaultMessage: 'Change the password'
+    defaultMessage: 'Change password'
   },
   old_psw: {
     id: 'old_psw',
@@ -18,7 +18,7 @@ export const password_msg = defineMessages({
   },
   placeholder_new_psw: {
     id: 'placeholder_new_psw',
-    defaultMessage: 'Please enter your login password'
+    defaultMessage: 'Please enter your new password'
   },
   placeholder_old_psw: {
     id: 'placeholder_old_psw',
@@ -30,10 +30,10 @@ export const password_msg = defineMessages({
   },
   tip_info: {
     id: 'tip_info',
-    defaultMessage: 'Password mismatch entered twice'
+    defaultMessage: 'Passwords must match'
   },
   reset_success: {
     id: 'reset_success',
-    defaultMessage: 'Successfully modified, please login again'
+    defaultMessage: 'New password set successfully, please login again'
   }
 });

@@ -61,6 +61,16 @@ export function putPasswordByUserId(userId,body) {
 	});
 }
 /**
+ * 获取设置密码的规则
+ *
+ * @export
+ * @param {*}
+ * @returns
+ */
+export function getCredentialRule() {
+	return axios.get(`/api/v1/ucsp/user/credential_rule`)
+}
+/**
  * 获取用户信息
  *
  * @export

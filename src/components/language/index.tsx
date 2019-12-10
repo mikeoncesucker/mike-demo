@@ -46,7 +46,7 @@ class Language extends React.Component<LanguageProps, any> {
       <label style={ styles }>
         <span 
           className={classNames('iconfont icon-change')} 
-          style={{cursor: 'pointer'}}
+          style={{cursor: 'pointer',}}
           onClick={ this.setLanguage }
         >
           { language }

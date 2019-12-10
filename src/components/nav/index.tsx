@@ -3,6 +3,7 @@ import { Breadcrumb, } from 'antd';
 import { withStyles } from "@material-ui/styles";
 import { Link, } from 'react-router-dom';
 import { common_msg } from '../../messages/common';
+import { store } from "../../store";
 export interface NavProps {
   intl;
   name;
@@ -40,6 +41,10 @@ class Nav extends React.Component<NavProps, any> {
       
     }
   }
+  resetQuery = () => {
+    store.dispatch.notice.resetQuery()
+  }
+
   public render() {
     const { classes, name, intl, title, jump } = this.props;
     const {formatMessage } = intl;
@@ -48,14 +53,17 @@ class Nav extends React.Component<NavProps, any> {
         <div className={classes.navbar}>
           <Breadcrumb>
             <Breadcrumb.Item>
-              <Link to={ '/dashboard' }>
+              <Link 
+                to={ '/dashboard' }
+                onClick={this.resetQuery}
+              >
                 {formatMessage(common_msg.portal)}
               </Link>
             </Breadcrumb.Item>
             <Breadcrumb.Item>
               {
                 jump ? 
-                  <Link  to={  `/${jump}` }>
+                  <Link to={ `/${jump}` }>
                     {formatMessage(name)}
                   </Link> :
                   formatMessage(name)
@@ -66,7 +74,7 @@ class Nav extends React.Component<NavProps, any> {
             {title ? formatMessage(title) : formatMessage(name)}
           </h2>
         </div>
-        <div style={{ border: '10px solid #f1f3f9' }}></div>
+        <div style={{ border: '.1rem solid #f1f3f9' }}></div>
       </div>
     )
   }

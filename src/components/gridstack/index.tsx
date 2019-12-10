@@ -6,23 +6,19 @@ declare var window: any;
 export interface IGridstackProps {
   data;
   isClick;
-  className?;
-  style?;
   name;
-  row;
   float;
   isMain;
+  theme;
   onChange?;
   autoPosition?;
   compareData?;
-  minHeight?;
 }
 declare const $: any;
-class Gridstack extends React.Component<IGridstackProps,any> {
+class Gridstack extends React.Component<IGridstackProps, any> {
   gridStack;
   grid;
   inited = false;
-  flag = false;
   constructor(props) {
     super(props);
     this.state = {};
@@ -38,7 +34,43 @@ class Gridstack extends React.Component<IGridstackProps,any> {
     }
   }
   init(data) {
-    let { name, float, isMain, autoPosition } = this.props;
+    let { name, float, isMain, autoPosition, theme } = this.props;
+    const accessToken = store.get("accessToken");
+    const theme_0 = {
+      'color_0': 'D8502C',
+      'color_1': 'BB1E48',
+      'color_2': '603BBC',
+      'color_3': '491BC6',
+      'color_4': '3380DC',
+      'color_5': '0A57C1',
+      'color_6': '2881EF',
+      'color_7': '5E3AB4',
+      'color_8': '9A01A4',
+      'color_9': '5A4E8C',
+      'color_10': '03A006',
+      'color_11': '0099AC',
+      'color_12': 'B76F54',
+      'color_13': '065B91',
+      'color_14': '08AFB6',
+      'color_15': 'AF9770',
+      'color_16': '0C90BF',
+      'color_17': '2DACC7',
+      'color_18': '5479EA',
+    };
+    const theme_1 = {
+      'color_0': '628C8A',
+      'color_1': '6D6D6F',
+      'color_2': '48616B',
+      'color_3': '979AA3',
+      'color_4': '758E93',
+      'color_5': '5D8698',
+      'color_6': '748E93',
+      'color_7': '688995',
+      'color_8': 'A6C0BD',
+      'color_9': '526C76',
+      'color_10': '556772'
+    }
+    const themes = theme === 'theme_0' ? theme_0 : theme_1;
     let self = this;
     var options = {
       acceptWidgets: true,
@@ -66,8 +98,8 @@ class Gridstack extends React.Component<IGridstackProps,any> {
           let { id, chineseName, englishName, url, icon, type } = data;
           let width = data.gsWidth;
           let height = data.gsHeight;
-          let left = data._gridstack_node.x;
-          let top = data._gridstack_node.y;
+          let left = data._gridstack_node && data._gridstack_node.x;
+          let top = data._gridstack_node && data._gridstack_node.y;
           let backgroundKey = data.backgroundkey;
           let obj = {
             id,
@@ -84,7 +116,7 @@ class Gridstack extends React.Component<IGridstackProps,any> {
           };
           objs.push(obj);
         }
-        if (self.props.onChange) self.props.onChange(objs,null,window.dragCheck);
+        if (self.props.onChange) self.props.onChange(objs, null, window.dragCheck);
       }
     });
     let dealData = items => {
@@ -94,8 +126,8 @@ class Gridstack extends React.Component<IGridstackProps,any> {
         let { id, chineseName, englishName, url, icon, type } = data;
         let width = data.gsWidth;
         let height = data.gsHeight;
-        let left = data._gridstack_node.x;
-        let top = data._gridstack_node.y;
+        let left = data._gridstack_node && data._gridstack_node.x;
+        let top = data._gridstack_node && data._gridstack_node.y;
         let backgroundKey = data.backgroundkey;
         let obj = {
           id,
@@ -120,16 +152,16 @@ class Gridstack extends React.Component<IGridstackProps,any> {
         let items2 = $(`#gridstack2`).find(".grid-stack-item");
         let objs = dealData(items);
         let objs2 = dealData(items2);
-        if (self.props.onChange) self.props.onChange(objs, objs2,window.dragCheck);
+        if (self.props.onChange) self.props.onChange(objs, objs2, window.dragCheck);
       }
     });
-
     let openUrl = e => {
       if (!window.dragCheck) {
-        if (e.currentTarget.dataset.type === "type_0") {
-          const accessToken = store.get("accessToken");
-          if (e.currentTarget.dataset.url !== "http://" && !this.props.isClick) {
-            window.open(e.currentTarget.dataset.url + `?token=${accessToken}`);
+        if (e.currentTarget.dataset.url !== "http://" && !this.props.isClick && e.currentTarget.dataset.type === 'type_0') {
+          if (e.currentTarget.dataset.secondLogin * 1) {
+            window.open(e.currentTarget.dataset.url);
+          } else {
+            window.open(e.currentTarget.dataset.url + `?accessToken=${accessToken}`);
           }
         }
       }
@@ -140,7 +172,6 @@ class Gridstack extends React.Component<IGridstackProps,any> {
         element.bind("mouseup", openUrl);
       }
     });
-
     _.map(data, function (node) {
       let el = `<div 
                     data-type="${node.type}" 
@@ -148,13 +179,14 @@ class Gridstack extends React.Component<IGridstackProps,any> {
                     data-id="${node.id}" 
                     data-name="${node.name}" 
                     data-icon="${node.icon}" 
+                    data-second-login="${node.secondLogin}" 
+                    data-theme="${theme}"
                     data-backgroundkey="${node.backgroundKey}">
                       <div class="grid-stack-item-content ${
         node.backgroundKey
-        }">
-                          <img style="height:1em; display:block; margin: 0.3em auto 0;" src="${
-        node.icon
-        }" />
+        }">       ${node.secondLogin ? `<img src=${require('../../assets/images/dashboard_tips.png')} alt='' class='dashboard_tips'/>` : ``}
+                  
+                  <img style="height: 42px; display:block; margin: .3rem auto 0;" src="${node.icon}" />
                           <p class="gridstack-title">${
         node.name ? node.name : ""
         }</p>
@@ -162,15 +194,22 @@ class Gridstack extends React.Component<IGridstackProps,any> {
                 <div/>`;
 
       if (node.type === "type_1") {
-        el = `<div data-type="${node.type}" 
+        el = `<div data-type="${node.type}" style='cursor: default'
                 data-url="${node.url}" 
                 data-id="${node.id}" 
-                data-name="${node.name}" 
-                data-icon="${node.icon}" 
+                data-name="${node.name}"
+                data-icon="${node.icon}"
                 data-backgroundKey="${node.backgroundKey}">
-                    <div class="grid-stack-item-content ${node.backgroundKey}">
-                      <img src="${node.content}" alt="" width="100%" height="100%">
+                    <div class="grid-stack-item-content ${node.backgroundKey}" style='overflow: hidden'>
+                      <iframe 
+                        src="${store.get("local_language") === 'zh' ? node.content : node.encontent}${node.content.indexOf('?') > -1 ? '&' : '?'}accessToken=${accessToken}&bgColor=${themes[node.backgroundKey]}" 
+                        width="100%" 
+                        height="100%" 
+                        frameborder="0" 
+                        scrolling="no"
+                      />
                     </div>
+                    <div class="grid-stack-item-content" style="background:transparent"></div>
                 </div>`;
       }
       let element = $(el);
@@ -203,9 +242,8 @@ class Gridstack extends React.Component<IGridstackProps,any> {
     return (
       <div className="gridstack grid-stack"
         style={{
-          fontSize: `${(window.innerHeight - 64 * 2 - 34 - 72) / 10}px`,
-          width: `${((window.innerHeight - 64 * 2 - 34 - 72) / 10) * 2 * 24}px`,
-          minHeight: this.props.minHeight
+          width: `100%`,
+          minHeight: '100%',
         }}
         id={name}
       />

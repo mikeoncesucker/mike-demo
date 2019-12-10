@@ -36,7 +36,7 @@ let detectBrowserLanguage = () => {
     })
     .value();
     
-  return detectedLocale || 'en'; // If no locale is detected, fallback to 'en'
+  return detectedLocale || 'zh'; // If no locale is detected, fallback to 'en'
 };
 
 let getTranslations = (locale) => {

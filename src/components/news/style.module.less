@@ -2,29 +2,29 @@
 .icon_notice {
   position:relative;
   display: inline-block;
-  margin-right: 18px;
-  font-size: 20px;
+  margin-right: .18rem;
+  font-size: .20rem;
   color: #fff;
 }
 .notice_num {
   position:absolute;
   background:red;
   color:#fff;
-  font-size:12px;
-  border-radius:10px;
-  width:32px;
-  height:20px;
-  padding:0px;
-  top:-7px;
-  right:-18px;
+  font-size:.12rem;
+  border-radius:.1rem;
+  width:.32rem;
+  height:.20rem;
+  padding:0;
+  top:-.07rem;
+  right:-.18rem;
   text-align:center;
-  line-height:20px;
+  line-height:.2rem;
 }
 .ant-popover-inner-content {
-  width: 328px;
+  width: 3.28rem;
 }
 .content{
-    width: 296px;
+    width: 2.96rem;
     overflow: hidden;
   }
   .notice_kong {
@@ -32,26 +32,44 @@
     height:100%;
     border-bottom: 1px solid #E8E8E8;
     text-align:center;
-    line-height: 250px;
+    line-height: 2.5rem;
     color:#5E616F;
-    font-size:14px
+    font-size:.14rem
   }
   .listFooter{
     width:100%;
-    font-size:14px;
+    font-size:.14rem;
     color:#5E616F;
     background:#fff;
-    padding-top:8px
+    padding-top:.08rem;
+    p {
+      margin-bottom: 0;
+    }
+    p:hover {
+      text-decoration: underline;
+      color: #08ABF8;
+    }
   }
   .noticItem {
     border-bottom: 1px solid #E8E8E8;
-    padding:12px 15px 8px;
-    margin:0 -15px;
+    padding:.12rem .15rem .08rem;
+    margin:0 -.15rem;
     cursor: pointer;
   }
   .title{
-    font-size:14px;
-    line-height:22px;
+    display: flex;
+    align-items: center;
+    font-size: .14rem;
+    line-height: .22rem;
+    span.name {
+      max-width: 80%;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    img{
+      margin-left: .04rem;
+    }
   }
   .title_unread {
     color:#33353D;
@@ -63,10 +81,10 @@
     color:#5E616F;
   }
   .txt{
-    font-size:12px;
-    margin-bottom:0px;
-    line-height:20px;
-    margin-top:6px;
+    font-size:.12rem;
+    margin-bottom:0;
+    line-height:.2rem;
+    margin-top:.06rem;
     width:100%;
     overflow:hidden;
     text-overflow:ellipsis;
@@ -74,10 +92,10 @@
   }
   .noticeBtm{
     color:#999BA2;
-    font-size:12px;
+    font-size: .12rem;
   }
   .noticeTime{
-    text-align:right
+    text-align: right;
   }
   .origin {
     white-space: nowrap;
@@ -85,6 +103,6 @@
     text-overflow: ellipsis;
   }
   .font{
-    font-size:14px;
-    margin-right: 4px
+    font-size:.14rem;
+    margin-right: .04rem
   }

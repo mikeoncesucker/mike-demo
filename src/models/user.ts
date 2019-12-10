@@ -55,6 +55,20 @@ export const user = {
           cb && cb(err)
         })
     },
+    async getCredentialRule({ cb }, rootState) {
+      userAPI
+        .getCredentialRule()
+        .then((res)=> {
+          if(res.status === 200) {
+            cb && cb(res.status, res.data);
+          }else {
+            cb && cb(new Error())
+          }
+        })
+        .catch((err)=> {
+
+        })
+    },
     async postCodeByVerify({ params, cb }, rootState) {
       userAPI
         .postCodeByVerify(params)

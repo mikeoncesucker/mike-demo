@@ -3,6 +3,7 @@ export const notice = {
   state: {
     notice: {},
     detail: {},
+    query: {},
   },
   reducers: {
     setNoticeList(state, payload) {
@@ -17,6 +18,9 @@ export const notice = {
     resetDetail(state, payload) {
       return Object.assign({}, state, payload);
     },
+    resetQuery(state: any, payload: any) {
+      return Object.assign(state, {query: {} });
+    },
   },
   effects: (dispatch) => ({
     getNoticeList({ query, cb }, rootState) {
@@ -25,7 +29,8 @@ export const notice = {
         .then((res) => {
           if (res.status === 200) {
             dispatch.notice.setNoticeList({ 
-              notice: res.data.data 
+              notice: res.data.data,
+              query,
             });
             cb && cb(null, res.data);
           } else {
@@ -91,6 +96,7 @@ export const notice = {
       dispatch.notice.resetDetail({
         detail: {}
       })
-    }
+    },
+    async resetQuery(rootState?: any) {}
   })
 };

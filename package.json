@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "dependencies": {
+    "@antv/data-set": "^0.10.2",
     "@material-ui/styles": "^4.2.0",
     "@rematch/core": "^1.1.0",
     "@types/jest": "24.0.15",
@@ -16,6 +17,7 @@
     "axios": "^0.19.0",
     "babel-plugin-import": "^1.12.0",
     "babel-polyfill": "^6.26.0",
+    "bizcharts": "^3.5.5",
     "customize-cra": "^0.2.14",
     "fs": "^0.0.1-security",
     "glob": "^7.1.4",
@@ -46,7 +48,8 @@
     "slick-carousel": "^1.8.1",
     "store": "^2.0.12",
     "typescript": "3.5.3",
-    "typescript-react-intl": "^0.4.0"
+    "typescript-react-intl": "^0.4.0",
+    "video.js": "^7.6.5"
   },
   "scripts": {
     "start": "react-app-rewired start",

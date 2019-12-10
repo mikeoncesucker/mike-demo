@@ -7,12 +7,16 @@ export const search = {
     statusList: [],
     appCodeList: [],
     typeList: [],
+    wordCloud: [],
   },
   reducers: {
     setQuery(state,payload) {
       return Object.assign({}, state, payload);
     },
     setDetail(state,payload) {
+      return Object.assign({}, state, payload)
+    },
+    setWordCloud(state,payload) {
       return Object.assign({}, state, payload)
     },
     setAppCodeList(state,payload) {
@@ -31,6 +35,9 @@ export const search = {
       return Object.assign({}, state, payload);
     },
     resetDetail(state,payload) {
+      return Object.assign({}, state, payload)
+    },
+    resetWordCloud(state,payload) {
       return Object.assign({}, state, payload)
     },
     resetAppCodeList(state,payload) {
@@ -61,6 +68,32 @@ export const search = {
         .catch((err) => {
           cb && cb(err);
         });
+    },
+    async getWordCloud({ query, cb }, rootState) {
+      searchAPI
+        .getWordCloud(query)
+        .then((res) => {
+          if (res.status === 200) {
+            const result = res.data.resultMap;
+            dispatch.search.setWordCloud({
+              wordCloud: result ? result.wordCloud : []
+            })
+            cb && cb(null, res.data);
+          } else {
+            cb && cb(new Error());
+          }
+        })
+    },
+    async getSaveQueryWord({ query, cb }, rootState) {
+      searchAPI
+        .getSaveQueryWord(query)
+        .then((res) => {
+          if (res.status === 200) {
+            cb && cb(null, res.data);
+          } else {
+            cb && cb(new Error());
+          }
+        })
     },
     async getDetailById({ id, cb }, rootState) {
       searchAPI
@@ -169,6 +202,11 @@ export const search = {
     resetDetails() {
       dispatch.search.resetDetail({
         detail: {}
+      })
+    },
+    resetWordClouds() {
+      dispatch.search.resetWordCloud({
+        wordCloud: []
       })
     },
     resetAppCodeLists() {

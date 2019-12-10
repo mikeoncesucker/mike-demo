@@ -1,12 +1,11 @@
 import * as React from 'react';
-import { Route, Switch, Redirect, } from 'react-router-dom';
+import { Route, Switch, } from 'react-router-dom';
 import loadable from 'react-loadable';
 import LoadingComponent from '@components/loading';
 
 export interface IAppProps {
   match: any;
 }
-
 const Dashboard = loadable({
   loader: () => import(/* webpackChunkName: "dashboard" */ './dashboard'),
   loading: LoadingComponent
@@ -36,7 +35,6 @@ export default class App extends React.Component<IAppProps> {
     let { match } = this.props;
     return (
       <Switch>
-        <Redirect exact from={`${match.url}/`} to={`${match.url}login`} />
         <Route path={`${match.url}dashboard`} component={Dashboard} />
         <Route path={`${match.url}password`} component={Password} />
         <Route exact path={`${match.url}search`} component={Search} />

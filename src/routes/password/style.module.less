@@ -4,20 +4,22 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: calc(~"100vh - 170px");
-  min-height: 400px;
+  height: calc(~"100vh - 1.7rem");
+  min-height: 4rem;
   background: #fff;
   color: #33353D;
   overflow: hidden;
   
   .account {
-    font-size: 24px;
-    font-weight: 400px;
+    font-size: .24rem;
+    font-weight: 400;
   }
   .btn {
     background-color: #08ABF8;
     border-color: #08ABF8;
-    margin: 22px auto 0;
+    height: .32rem;
+    margin: .22rem auto 0;
+    font-size: .14rem;
   }
   .input_warpper {
     display: flex;
@@ -29,16 +31,23 @@
   display: flex;
   flex-direction: row;
   >span {
-    line-height: 40px;
+    line-height: .4rem;
     text-align: right;
-    margin-right: 22px;
+    margin-right: .22rem;
   }
   span {
-    font-size: 14px;
+    font-size: .14rem;
     color: #33353D;
     white-space: nowrap;
   }
   input {
-    width: 304px;
+    width: 3.04rem;
+    height: .4rem;
+    font-size: .14rem;
+  }
+}
+:global {
+  .ant-form-explain, .ant-form-extra {
+    font-size: .14rem
   }
 }

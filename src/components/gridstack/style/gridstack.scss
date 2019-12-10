@@ -55,22 +55,7 @@ $animation_speed: 0.3s !default;
       right: $horizontal_padding / 2;
       width: auto;
       z-index: 0 !important;
-      overflow-x: hidden;
-      overflow-y: auto;
-      top: '0px !important';
-      left: '0px !important';
-      right: '5px !important';
-      bottom: '5px !important';
-      background-color: '#18bc9c';
-    }
-
-    > .grid-stack-item-content1 {
-      position: 'absolute';
-      top: '0px !important';
-      left: '0px !important';
-      right: '5px !important';
-      bottom: '5px !important';
-      background-color: '#18bc9c';
+      overflow: hidden;
     }
 
     > .ui-resizable-handle {
@@ -224,28 +209,27 @@ $animation_speed: 0.3s !default;
 
 .gridstack-title {
   color: #fff;
-  font-size: 12px;
+  font-size: .16rem;
   position: absolute;
-  bottom: 8px;
-  left: 10px;
-  right: 10px;
+  bottom: .08rem;
+  left: .1rem;
+  right: .1rem;
   text-align: left;
-  margin-bottom: 0px;
-  width: calc( 100% - 20px);
+  margin-bottom: 0;
+  width: calc( 100% - .2rem);
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
 }
-
 .theme_0 {
   .color_0 {
-    background-color: #D54928 !important;
+    background-color: #D8502C !important;
   }
   .color_1 {
     background-color: #BB1E48 !important;
   }
   .color_2 {
-    background-color: #DD6D53 !important;
+    background-color: #603BBC !important;
   }
   .color_3 {
     background-color: #491BC6 !important;
@@ -254,16 +238,46 @@ $animation_speed: 0.3s !default;
     background-color: #3380DC !important;
   }
   .color_5 {
-    background-color: #03A006 !important;
+    background-color: #0A57C1 !important;
   }
   .color_6 {
-    background-color: #9E01A6 !important;
+    background-color: #2881EF !important;
   }
   .color_7 {
-    background-color: #603BBC !important;
+    background-color: #5E3AB4 !important;
   }
   .color_8 {
-    background-color: #2881EF !important;
+    background-color: #9A01A4 !important;
+  }
+  .color_9 {
+    background-color: #5A4E8C !important;
+  }
+  .color_10 {
+    background-color: #03A006 !important;
+  }
+  .color_11 {
+    background-color: #0099AC !important;
+  }
+  .color_12 {
+    background-color: #B76F54 !important;
+  }
+  .color_13 {
+    background-color: #065B91 !important;
+  }
+  .color_14 {
+    background-color: #08AFB6 !important;
+  }
+  .color_15 {
+    background-color: #AF9770 !important;
+  }
+  .color_16 {
+    background-color: #0C90BF !important;
+  }
+  .color_17 {
+    background-color: #2DACC7 !important;
+  }
+  .color_18 {
+    background-color: #5479EA !important;
   }
 }
 
@@ -290,9 +304,21 @@ $animation_speed: 0.3s !default;
     background-color: #748E93 !important;
   }
   .color_7 {
-    background-color: #3E8FE1 !important;
+    background-color: #688995 !important;
   }
   .color_8 {
     background-color: #A6C0BD !important;
   }
+  .color_9 {
+    background-color: #526C76 !important;
+  }
+  .color_10 {
+    background-color: #556772 !important;
+  }
+}
+
+.dashboard_tips {
+  position: absolute;
+  top: .2em;
+  right: .2em;
 }

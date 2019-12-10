@@ -4,6 +4,7 @@ import styles from './style.module.less';
 import { injectIntl } from 'react-intl';
 import Language from '../../components/language';
 import Theme from './theme';
+import  Footer  from '../../components/footer';
 import { connect } from 'react-redux';
 import { login_msg } from '../../messages/login';
 import { common_msg } from '../../messages/common';
@@ -14,6 +15,7 @@ export interface FormProps {
 	history;
 	intl;
 	putRestPassword;
+	getCredentialRule;
 	postCodeByVerify;
 	postResetPassWordByVerify;
 }
@@ -30,10 +32,20 @@ class LoginForm extends React.Component<FormProps, any> {
 			way: null,
 			endtime: 60,
 			isSend: false,
+			passwordRule: '',
 		}
 	}
 	componentDidMount() {
-		this.props.form.validateFields();
+		const { form, getCredentialRule, intl } = this.props;
+		form.validateFields();
+		getCredentialRule({
+			cb: (code,data)=> {
+				const res = data.data;
+				this.setState({
+					passwordRule: intl.locale === 'zh'? res.credentialRule : res.credentialRuleEn
+				})
+			}
+		})
 	}
 	goBack = () => {
 		const { history } = this.props;
@@ -63,37 +75,44 @@ class LoginForm extends React.Component<FormProps, any> {
 			way: val,
 		})
 	}
-	sendCode = () => {
+	sendCode = (event) => {
 		const { formatMessage } = this.props.intl;
 		const { getFieldValue } = this.props.form;
 		const account = getFieldValue('account');
 		const { way } = this.state;
 		let time = 60;
 		if (!account) {
-			message.warn(formatMessage(login_msg.placeholder_username))
+			message.warn(formatMessage(login_msg.placeholder_account))
 		} else if (!way) {
 			message.warn(formatMessage(login_msg.placeholder_way))
 		} else {
-			this.props.postCodeByVerify({
+				this.setState({
+					isSend: true
+				})
+				this.props.postCodeByVerify({
 				params: {
 					account,
 					type: way,
 				},
-				cb: (err, res)=> {
+				cb: (data,res)=> {
 					if(res.status.code === '200') {
 						this.timer = setInterval(() => {
 							this.setState({
-								endtime: --time,
-								isSend: true,
+								endtime: --time
 							}, () => {
 								if (time === 0) {
 									clearInterval(this.timer);
 									this.setState({
-										isSend: false
+										isSend: false,
+										endtime: 60
 									})
 								}
 							})
 						}, 1000)
+					}else {
+						this.setState({
+							isSend: false,
+						})
 					}
 				}
 			})
@@ -122,9 +141,8 @@ class LoginForm extends React.Component<FormProps, any> {
 	}
 	compareToFirstPassword = (rule, value, callback) => {
 		const { form, intl } = this.props;
-		const { formatMessage } = intl;
 		if (value && value !== form.getFieldValue('credent')) {
-			callback(`${formatMessage(login_msg.tip_info)}!`);
+			callback(`${intl.formatMessage(login_msg.tip_info)}`);
 		} else {
 			callback();
 		}
@@ -140,7 +158,7 @@ class LoginForm extends React.Component<FormProps, any> {
 	public render() {
 		const { location, intl, form  } = this.props;
 		const { formatMessage } = intl;
-		const { endtime, isSend } = this.state;
+		const { endtime, isSend, passwordRule } = this.state;
 		const { getFieldDecorator, getFieldsError, isFieldTouched, getFieldError, } = form;
 		const usernameError = isFieldTouched('account') && getFieldError('account');
 		const wayError = isFieldTouched('type') && getFieldError('type');
@@ -149,7 +167,7 @@ class LoginForm extends React.Component<FormProps, any> {
 		const conformPasswordError = isFieldTouched('credentConfirm') && getFieldError('credentConfirm');
 		return (
 			<div className={styles.root} 
-				style={{ background:`url(${require('../../assets/images/login_bg_btm.jpg')})`}}
+				style={{ background:`url(${require('../../assets/images/login_bg_btm.jpg')})`, backgroundSize: 'cover'}}
 			>
 				<div className={styles.container}>
 					<Theme intl={intl}></Theme>
@@ -173,7 +191,7 @@ class LoginForm extends React.Component<FormProps, any> {
 									{getFieldDecorator('account', {
 										rules: [{ 
 											required: true, 
-											message: formatMessage(login_msg.placeholder_username) 
+											message: formatMessage(login_msg.placeholder_account) 
 										}],
 										initialValue: location.state && location.state.account,
 									})(
@@ -181,7 +199,7 @@ class LoginForm extends React.Component<FormProps, any> {
 											type='text'
 											className={styles.input}
 											prefix={<Icon type="user" className={styles.fontColor} />}
-											placeholder={formatMessage(login_msg.placeholder_username)}
+											placeholder={formatMessage(login_msg.placeholder_account)}
 										/>,
 									)}
 								</Form.Item>
@@ -221,11 +239,13 @@ class LoginForm extends React.Component<FormProps, any> {
 											type='text'
 											className={styles.input}
 											prefix={<Icon type="safety" className={styles.fontColor} />}
-											suffix={<Button onClick={this.sendCode} className={styles.btnCode} 
-											disabled={isSend} type='primary'
-										>
-												{formatMessage(login_msg.btn_send_psw)} {isSend ? `(${endtime})` : null}
-											</Button>}
+											suffix={<Button 
+													onClick={this.sendCode} className={styles.btnCode}
+													disabled={isSend} type='primary'
+												>
+													{formatMessage(login_msg.btn_send_psw)} {endtime<60 ? `(${endtime})` : null}
+												</Button>
+											}
 											placeholder={formatMessage(login_msg.placeholder_code)}
 										/>,
 									)}
@@ -271,6 +291,7 @@ class LoginForm extends React.Component<FormProps, any> {
 										/>,
 									)}
 								</Form.Item>
+								<p className="passworRule">{passwordRule}</p>
 								<Button 
 									type="primary" 
 									htmlType="submit" 
@@ -286,9 +307,7 @@ class LoginForm extends React.Component<FormProps, any> {
 						</div>
 					</div>
 				</div>
-				<div className={styles.copyRight}>
-					Copyright &#169;&#65039; 2019 {formatMessage(common_msg.corpright)}
-				</div>
+				<Footer intl={intl}/>
 			</div>
 		);
 	}
@@ -300,11 +319,13 @@ const mapState2Props = () => ({
 const mapDispatch2Props = ({
 	user: { 
 		postCodeByVerify, 
-		postResetPassWordByVerify 
+		postResetPassWordByVerify,
+		getCredentialRule
 	}
 }:any) => ({
 	postCodeByVerify, 
-	postResetPassWordByVerify
+	postResetPassWordByVerify,
+	getCredentialRule
 });
 
 export default Form.create()(

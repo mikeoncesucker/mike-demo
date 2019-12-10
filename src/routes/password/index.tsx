@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { Layout, Button, Input, Form, message, } from 'antd';
 import HeaderBar from '../../components/header_bar';
 import Nav from '../../components/nav';
+import Footer from '../../components/footer';
 import styles from './style.module.less';
 import { injectIntl } from 'react-intl';
 import store from 'store';
@@ -15,6 +16,7 @@ export interface PasswordProps {
   intl;
   form;
   putPasswordByUserId;
+  getCredentialRule;
   resetQuerys;
 }
 class Password extends React.Component<PasswordProps, any> {
@@ -22,18 +24,39 @@ class Password extends React.Component<PasswordProps, any> {
     super(props);
     this.state = {
       newPsw: null,
+      passwordRule: '',
     }
   }
   componentDidMount() {
-    this.props.resetQuerys()
+    const { resetQuerys, getCredentialRule, intl, } = this.props;
+    resetQuerys()
+    getCredentialRule({
+      cb: (code,data)=> {
+        const res = data.data;
+				this.setState({
+					passwordRule: intl.locale === 'zh'? res.credentialRule : res.credentialRuleEn
+				})
+      }
+    })
   }
   onChange = (event: any) => {
     this.setState({ newPsw: event.target.value });
   };
+  handleConfirmBlur = e => {
+    const { value } = e.target;
+		this.setState({ confirmDirty: this.state.confirmDirty || !!value });
+  };
+  validateToNextPassword = (rule, value, callback) => {
+		const { form } = this.props;
+		if (value && this.state.confirmDirty) {
+			form.validateFields(['confirmPsw'], { force: true });
+		}
+		callback();
+	}
   validatePassword = (rule, value, callback) => {
-    const { formatMessage } = this.props.intl;
-    if (value && value !== this.state.newPsw) {
-      callback(`${formatMessage(password_msg.tip_info)}!`);
+    const { form, intl } = this.props;
+    if (value && value !== form.getFieldValue('newPassword')) {
+      callback(`${intl.formatMessage(password_msg.tip_info)}`);
     } else {
       callback()
     }
@@ -62,21 +85,20 @@ class Password extends React.Component<PasswordProps, any> {
         this.props.form.validateFields();
       }
     })
-
-
   }
   public render() {
-    let { user, history, intl, form } = this.props;
+    const { user, history, intl, form } = this.props;
+    const { passwordRule } = this.state;
     const { getFieldDecorator } = form;
     const { formatMessage } = intl;
-    const minWidth = intl.locale === 'zh' ? '72px' : '173px';
+    const minWidth = intl.locale === 'zh' ? '.72rem' : '1.73rem';
     return (
       <Layout className="layout">
         <HeaderBar history={history} intl={intl} />
         <Nav name={password_msg.change_psw} intl={intl} />
         <div className={styles.warpper}>
           <p className={styles.account}>
-            {user.data.user.account}
+            {user.data.user.name}
           </p>
           <Form onSubmit={this.handleSubmit} className={styles.input_warpper}>
             <div className={styles.item}>
@@ -105,6 +127,8 @@ class Password extends React.Component<PasswordProps, any> {
                   rules: [{
                     required: true,
                     message: formatMessage(password_msg.placeholder_new_psw)
+                  }, {
+                    validator: this.validateToNextPassword,
                   }],
                 })(
                   <Input.Password
@@ -128,10 +152,12 @@ class Password extends React.Component<PasswordProps, any> {
                 })(
                   <Input.Password 
                     placeholder={formatMessage(password_msg.new_rp_psw)} 
+                    onBlur={this.handleConfirmBlur}
                   />,
                 )}
               </Form.Item>
             </div>
+            <p style={{fontSize: '.14rem'}}>{passwordRule}</p>
             <Button
               type="primary"
               className={styles.btn}
@@ -141,6 +167,7 @@ class Password extends React.Component<PasswordProps, any> {
             </Button>
           </Form>
         </div>
+        <Footer intl={intl} bg='#213571'/>
       </Layout>
     )
   }
@@ -156,12 +183,14 @@ const mapState2Props = ({
 const mapDispatch2Props = ({
   user: {
     putPasswordByUserId,
+    getCredentialRule
   },
   search: {
     resetQuerys
   }
 }: any) => ({
   putPasswordByUserId,
+  getCredentialRule,
   resetQuerys,
 })
 

@@ -6,6 +6,6 @@ export const detail_msg = defineMessages({
 	},
 	msg_detail: {
 		id: 'msg_detail',
-		defaultMessage: 'Message Detail'
+		defaultMessage: 'Message detail'
 	}
 });

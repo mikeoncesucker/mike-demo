@@ -2,27 +2,31 @@ import { defineMessages } from 'react-intl';
 export const search_msg = defineMessages({
 	search_key: {
 		id: 'search_key',
-		defaultMessage: 'Please enter keywords'
+		defaultMessage: 'Please enter keyword'
 	},
 	search_msg_pre: {
 		id: 'search_msg_pre',
-		defaultMessage: 'I found it for you'
+		defaultMessage: 'Results found'
 	},
 	search_msg_suffix: {
 		id: 'search_msg_suffix',
-		defaultMessage: 'order relevant results'
+		defaultMessage: 'related'
 	},
 	search_result_count: {
 		id: 'search_result_count',
-		defaultMessage: 'pieces'
+		defaultMessage: 'items'
+	},
+	search_hot: {
+		id: 'search_hot',
+		defaultMessage: 'Search hotspots'
 	},
 	sex: {
 		id: 'sex',
-		defaultMessage: 'Sex'
+		defaultMessage: 'Gender'
 	},
 	tel: {
 		id: 'tel',
-		defaultMessage: 'Tel'
+		defaultMessage: 'Telephone'
 	},
 	branch: {
 		id: 'branch',
@@ -30,7 +34,7 @@ export const search_msg = defineMessages({
 	},
 	job: {
 		id: 'job',
-		defaultMessage: 'Job'
+		defaultMessage: 'Position'
 	},
 	account: {
 		id: 'account',
@@ -42,11 +46,15 @@ export const search_msg = defineMessages({
 	},
 	event_info: {
 		id: 'event_info',
-		defaultMessage: 'Basic information'
+		defaultMessage: 'General information'
 	},
 	event_success: {
 		id: 'event_success',
 		defaultMessage: 'Success'
+	},
+	event_fail: {
+		id: 'event_fail',
+		defaultMessage: 'Fail'
 	},
 	event_id: {
 		id: 'event_id',
@@ -54,7 +62,7 @@ export const search_msg = defineMessages({
 	},
 	event_name: {
 		id: 'event_name',
-		defaultMessage: 'Source system'
+		defaultMessage: 'Source System'
 	},
 	event_type: {
 		id: 'event_type',
@@ -64,21 +72,25 @@ export const search_msg = defineMessages({
 		id: 'event_level',
 		defaultMessage: 'Event level'
 	},
+	event_title: {
+		id: 'event_title',
+		defaultMessage: 'Event title'
+	},
 	event_target: {
 		id: 'event_target',
 		defaultMessage: 'Notification object'
 	},
 	event_message: {
 		id: 'event_message',
-		defaultMessage: 'Push status (shortMessage)'
+		defaultMessage: 'Push status (SMS)'
 	},
 	event_happen: {
 		id: 'event_happen',
-		defaultMessage: 'Create time'
+		defaultMessage: 'Occurrence time'
 	},
 	event_receive: {
 		id: 'event_receive',
-		defaultMessage: 'Receiving tim'
+		defaultMessage: 'Receiving time'
 	},
 	event_portal: {
 		id: 'event_portal',
@@ -86,18 +98,30 @@ export const search_msg = defineMessages({
 	},
   event_deal: {
 		id: 'event_deal',
-		defaultMessage: 'Event handling status'
+		defaultMessage: 'Timeout'
 	},
 	event_circle: {
 		id: 'event_circle',
-		defaultMessage: 'Processing link'
+		defaultMessage: 'Processing step'
 	},
 	event_send: {
 		id: 'event_send',
-		defaultMessage: 'Delivery time'
+		defaultMessage: 'Push time'
 	},
 	event_des: {
 		id: 'event_des',
-		defaultMessage: 'Describe'
-	}
+		defaultMessage: 'Description'
+	},
+	describe_details: {
+		id: 'describe_details',
+		defaultMessage: 'Description detail'
+	},
+	view_details: {
+		id: 'view_details',
+		defaultMessage: 'View details'
+	},
+	event_link: {
+		id: 'event_link',
+		defaultMessage: 'Progress'
+	},
 });

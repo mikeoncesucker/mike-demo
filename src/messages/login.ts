@@ -2,7 +2,7 @@ import { defineMessages } from 'react-intl';
 export const login_msg = defineMessages({
   login: {
     id: 'login',
-    defaultMessage: 'login'
+    defaultMessage: 'Login'
   },
   welcome_to_login: {
     id: 'welcome_to_login',
@@ -10,23 +10,19 @@ export const login_msg = defineMessages({
   },
   forget_psw: {
     id: 'forget_psw',
-    defaultMessage: 'Forget the password'
+    defaultMessage: 'Forget password'
   },
   placeholder_account: {
     id: 'placeholder_account',
-    defaultMessage: 'Please enter your login account'
+    defaultMessage: 'Please enter your account'
   },
   placeholder_psw: {
     id: 'placeholder_psw',
-    defaultMessage: 'Please enter your login password'
-  },
-  placeholder_username: {
-    id: 'placeholder_username',
-    defaultMessage: 'Please enter your account'
+    defaultMessage: 'Please enter your password'
   },
   placeholder_way: {
     id: 'placeholder_way',
-    defaultMessage: 'Please chose a way of reply'
+    defaultMessage: 'Please select how to retrive password'
   },
   placeholder_code: {
     id: 'placeholder_code',
@@ -34,31 +30,31 @@ export const login_msg = defineMessages({
   },
   placeholder_new_psw: {
     id: 'placeholder_new_psw',
-    defaultMessage: 'Please enter your login password'
+    defaultMessage: 'Please enter your new password'
   },
   placeholder_re_psw: {
     id: 'placeholder_re_psw',
-    defaultMessage: 'Please re-enter your login password'
+    defaultMessage: 'Please re-enter your new password'
   },
   find_email: {
     id: 'find_email',
-    defaultMessage: 'Mailbox retrieval'
+    defaultMessage: 'Retrive password by email'
   },
   find_tel: {
     id: 'find_tel',
-    defaultMessage: 'Mobile number recovery'
+    defaultMessage: 'Retrive password by phone'
   },
   reset_success: {
     id: 'reset_success',
-    defaultMessage: 'The new password is set successfully. Please login again'
+    defaultMessage: 'New password set successfully, please login again'
   },
   btn_forget_psw: {
     id: 'btn_forget_psw',
-    defaultMessage: 'Forget the password'
+    defaultMessage: 'Forget password'
   },
   btn_send_psw: {
     id: 'btn_send_psw',
-    defaultMessage: 'Send Code'
+    defaultMessage: 'Send verification code'
   },
   btn_contact: {
     id: 'btn_contact',
@@ -66,11 +62,11 @@ export const login_msg = defineMessages({
   },
   tip_info: {
     id: 'tip_info',
-    defaultMessage: 'Password mismatch entered twice'
+    defaultMessage: 'New password and confirm password must be the same'
   },
   err_number_info: {
     id: 'err_number_info',
-    defaultMessage: 'Error in mobile phone number'
+    defaultMessage: 'Phone number is invalid'
   },
   title_pre: {
     id: 'title_pre',
@@ -80,16 +76,24 @@ export const login_msg = defineMessages({
     id: 'title_sufix',
     defaultMessage: 'Unified Collaborative Support Platform'
   },
+  login_remind_one: {
+    id: 'login_remind_one',
+    defaultMessage: 'Your password will expire tomorrow',
+  },
+  login_remind_two: {
+    id: 'login_remind_two',
+    defaultMessage: 'Your password will expire in 2 days',
+  },
   login_remind_three: {
     id: 'login_remind_three',
-    defaultMessage: 'Password expires after 3 days',
+    defaultMessage: 'Your password will expire in 3 days',
   },
   login_remind_seven: {
     id: 'login_remind_seven',
-    defaultMessage: 'Password expires after 7 days',
+    defaultMessage: 'Your password will expire in 7 days',
   },
   login_remind_thirty: {
     id: 'login_remind_thirty',
-    defaultMessage: 'Password expires after 30 days',
+    defaultMessage: 'Your password will expire in 30 days',
   }
 })

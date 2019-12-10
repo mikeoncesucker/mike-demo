@@ -4,6 +4,8 @@ import styles from './style.module.less';
 import News from '../news';
 import Language from '../language';
 import { Link } from 'react-router-dom';
+import { store } from "../../store";
+
 export interface HeaderBarProps {
   history;
   intl;
@@ -16,11 +18,17 @@ class HeaderBar extends React.Component<HeaderBarProps, any> {
     this.state = {
     }
   }
+  resetQuery = () => {
+    store.dispatch.notice.resetQuery()
+  }
   public render() {
     const { history, intl, show } = this.props;
     return (
       <header className={styles.header}>
-        <Link to={'/dashboard'}>
+        <Link 
+          onClick={this.resetQuery}
+          to={'/dashboard'}
+        >
           <img alt="logo" src={require('../../assets/images/logo.png')} />
         </Link>
        

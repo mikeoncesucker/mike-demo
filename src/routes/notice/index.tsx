@@ -4,6 +4,7 @@ import { Layout, Pagination, Modal, Icon, message } from 'antd';
 import ResultItem from './result_item';
 import Nav from '../../components/nav';
 import HeaderBar from '../../components/header_bar';
+import Footer from '../../components/footer';
 import styles from './style.module.less';
 import store from 'store';
 import classNames from 'classnames';
@@ -11,7 +12,6 @@ import { injectIntl } from 'react-intl';
 import { notice_msg } from '../../messages/notice';
 import { common_msg } from '../../messages/common';
 const { confirm } = Modal;
-const { Footer } = Layout;
 export interface NoticeProps {
   history;
   location;
@@ -22,6 +22,7 @@ export interface NoticeProps {
   getNoticeList;
   deleteNotice;
   notice;
+  query;
   resetNoticeRead;
   resetNoticeLists;
 }
@@ -34,8 +35,9 @@ class Notice extends React.Component<NoticeProps, any> {
     }
   }
   componentDidMount() {
-    this.getData();
-    this.props.resetQuerys();
+    const { query, resetQuerys } = this.props;
+    this.onChange(query.pageNumber || this.state.pageNumber);
+    resetQuerys();
   }
   componentWillUnmount() {
     const { resetNoticeLists, } = this.props;
@@ -51,7 +53,9 @@ class Notice extends React.Component<NoticeProps, any> {
         pageNumber,
         pageSize: 5
       },
-      cb: (err, res) => { }
+      cb: (err, res) => { 
+
+      }
     });
   };
   // 分页
@@ -69,6 +73,15 @@ class Notice extends React.Component<NoticeProps, any> {
         this.getData()
       }
     })
+  }
+  componentWillReceiveProps(nextProps) {
+    if(nextProps) {
+      const list = nextProps.notice.noticeEntities || [];
+      const count = nextProps.notice.count;
+      if(!list.length && count) {
+        this.onChange(this.state.pageNumber-1)
+      }
+    }
   }
   clearList = () => {
     const { deleteNotice, notice, intl } = this.props;
@@ -96,7 +109,7 @@ class Notice extends React.Component<NoticeProps, any> {
     return (
       <Layout className="layout">
         <HeaderBar history={history} intl={intl} show={true} /> 
-        <div style={{ minHeight: `${window.innerHeight - 64 - 32}px`, backgroundColor: '#fff' }}>
+        <div className={styles.noticeContent}>
           <Nav name={notice_msg.message} title={notice_msg.msg_list} intl={intl}></Nav>
           <div className={styles.result}>
             <div className={styles.content}>
@@ -130,23 +143,27 @@ class Notice extends React.Component<NoticeProps, any> {
                     total =>  `${formatMessage(common_msg.total)} ${total} ${formatMessage(common_msg.count)}` 
                   }
                   onChange={this.onChange}
-                  current={parseInt(this.state.pageNumber)}
+                  current={this.state.pageNumber}
                   pageSize={5}
                 />
               </div>
             ) : null
           }
         </div>
-        <Footer className={styles.footer}>
-          Copyright &#169;&#65039; 2019 {formatMessage(common_msg.corpright)}
-        </Footer>
+        <Footer intl={intl} bg='#213571'/>
       </Layout>
     );
   }
 }
 
-const mapState2Props = ({ notice: { notice } }) => ({
-  notice
+const mapState2Props = ({ 
+  notice: { 
+    notice,
+    query
+  } 
+}) => ({
+  notice,
+  query
 })
 const mapDispatch2Props = ({ 
   common: { 
@@ -156,6 +173,7 @@ const mapDispatch2Props = ({
     getNoticeList, 
     deleteNotice, 
     resetNoticeLists,
+    
   },
   search: {
     resetQuerys,

@@ -67,24 +67,24 @@ class Sliders extends React.Component<SliderProps, any> {
                   <div className={styles.item_content}>
                     <p className={styles.name} dangerouslySetInnerHTML={{ __html: item.name }} />
                     <div className={styles.info_item}>
-                      <p>{formatMessage(search_msg.sex)}：</p>
-                      <p>{item.sex}</p>
+                      <p>{formatMessage(search_msg.sex)}</p>
+                      <p>：{item.sex}</p>
                     </div>
                     <div className={styles.info_item}>
-                      <p>{formatMessage(search_msg.tel)}：</p>
-                      <p>{item.phone}</p>
+                      <p>{formatMessage(search_msg.tel)}</p>
+                      <p>：{item.phone}</p>
                     </div>
                     <div className={styles.info_item}>
-                      <p>{formatMessage(search_msg.branch)}：</p>
-                      <p>{item.organize}</p>
+                      <p>{formatMessage(search_msg.branch)}</p>
+                      <p>：{item.organize}</p>
                     </div>
                     <div className={styles.info_item}>
-                      <p>{formatMessage(search_msg.job)}：</p>
-                      <p>{item.job}</p>
+                      <p>{formatMessage(search_msg.job)}</p>
+                      <p>：{item.job}</p>
                     </div>
                     <div className={styles.info_item}>
-                      <p>{formatMessage(search_msg.account)}：</p>
-                      <p title={item.userId}>{item.userId}</p>
+                      <p>{formatMessage(search_msg.account)}</p>
+                      <p title={item.userId}>：{item.userId}</p>
                     </div>
                   </div>
                 </div>

@@ -21,7 +21,7 @@ class Center extends React.Component<CenterProps, any> {
   }
   logout = () => {
     let { logout, history } = this.props;
-    let accessToken = store.get('accessToken');
+    let accessToken = store.get('accessToken') || '';
     const { formatMessage } = this.props.intl;
     confirm({
       title: formatMessage(common_msg.confirm_txt),
@@ -35,7 +35,7 @@ class Center extends React.Component<CenterProps, any> {
               store.remove('accessToken');
               message.success(formatMessage(common_msg.message_back));
               history.push('/login');
-            }else {
+            } else {
               store.remove('accessToken');
               history.push('/login');
             }
@@ -48,9 +48,8 @@ class Center extends React.Component<CenterProps, any> {
   public render() {
     const { formatMessage } = this.props.intl;
     let { user, show, } = this.props;
-    const userName = user ? user.data.user.account : '';
     const menuHeaderDropdown = (
-      <Menu className={styles.menu} selectedKeys={[]}>
+      <Menu selectedKeys={[]}>
         <Menu.Item key="password" onClick={
           () => {
             this.props.history.push('/password')
@@ -68,7 +67,7 @@ class Center extends React.Component<CenterProps, any> {
     const center_icon = (
       <label className={`${styles.action} ${styles.account}`}>
         <span className="iconfont icon-principal" />
-        <span className={styles.text_hide}>{userName}</span>
+        <span className={styles.text_hide}>{user.data.user.name}</span>
         <span className="iconfont icon-down" />
       </label>
     )
@@ -76,28 +75,28 @@ class Center extends React.Component<CenterProps, any> {
       <div>
         {show ? center_icon :
           (<Dropdown overlay={menuHeaderDropdown}>
-            { center_icon }
+            {center_icon}
           </Dropdown>)
         }
       </div>
     );
   }
 }
-const mapState2Props = ({ 
-  user: { 
-    user 
-  }, 
+const mapState2Props = ({
+  user: {
+    user
+  },
 }) => ({
   user,
 })
 const mapDispatch2Props = ({
   user: {
-    logout
+    logout,
   }
-}:any) => ({
-  logout
+}: any) => ({
+  logout,
 })
 export default connect(
-  mapState2Props, 
+  mapState2Props,
   mapDispatch2Props
 )(Center)
