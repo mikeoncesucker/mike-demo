@@ -28,7 +28,7 @@
     "less-loader": "^5.0.0",
     "lodash": "^4.17.11",
     "moment": "^2.24.0",
-    "qs": "^6.7.0",
+    "qs": "^6.7.3",
     "react": "^16.8.6",
     "react-app-rewire-output": "^1.0.0",
     "react-app-rewired": "^2.1.3",
